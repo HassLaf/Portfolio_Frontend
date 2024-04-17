@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import ProjectList from "./ProjectElement"
+import ProjectList from "./ProjectElement";
+import { Button } from "@/components/ui/button"
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
@@ -24,7 +25,7 @@ const SearchParams = () => {
     }
 
     return (
-      <div className="search-params">
+      <div>
         <form onSubmit={(e) => {
             e.preventDefault();
             requesttPets();
@@ -71,7 +72,7 @@ const SearchParams = () => {
                 ))}
             </select>
             </label>
-                <button>Submit</button>
+            <Button>Submit</Button>
                 </form>
                 <ProjectList projects={projects} />
             </div>
