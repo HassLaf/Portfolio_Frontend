@@ -1,13 +1,35 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import ProjectList from "./ProjectElement"
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
     const [location,setLocation] = useState("");
     const [animal, updateAnimal] = useState("");
+    const [breed, setBreed] = useState("");
+    const  [projects, setProjects] = useState([]);
+    const breeds = ["bird", "cat", "dog", "rabbit", "reptile"];
+
+
+    useEffect(() => {
+        requesttPets();
+    }, []) ;
+
+    async function requesttPets() {
+        const res = await fetch(
+            `http://localhost:3510/projects`
+        );
+        const json = await res.json();
+        
+        setProjects(json);
+    }
+
     return (
       <div className="search-params">
-        <form>
+        <form onSubmit={(e) => {
+            e.preventDefault();
+            requesttPets();
+        }
+        }>
           <label htmlFor="location">
             Location
             <input onChange={e => setLocation(e.target.value)} 
@@ -20,11 +42,7 @@ const SearchParams = () => {
                 value={animal}
                 onChange={(e) => {
                 updateAnimal(e.target.value);
-                updateBreed("");
-                }}
-                onBlur={(e) => {
-                updateAnimal(e.target.value);
-                updateBreed("");
+                setBreed("");
                 }}
             >
                 <option />
@@ -35,8 +53,27 @@ const SearchParams = () => {
                 ))}
             </select>
             </label>
+            <label htmlFor="Breed">
+            Breed
+            <select
+                id="breed"
+                disabled={breeds.length===0}
+                value={breed}
+                onChange={(e) => {
+                setBreed(e.target.value);
+                }}
+            >
+                <option />
+                {breeds.map((breed) => (
+                <option key={breed} value={breed}>
+                    {breed}
+                </option>
+                ))}
+            </select>
+            </label>
                 <button>Submit</button>
                 </form>
+                <ProjectList projects={projects} />
             </div>
             );
         };
