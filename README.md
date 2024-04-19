@@ -2,18 +2,18 @@
 
 ## Description
 
-Ce projet représente la partie frontend du projet portfolio développé dans le cadre de notre TP de matiére Fullstack
+Ce projet représente la partie frontend du portfolio développé dans le cadre de notre TP de la matière Fullstack.
 
 ## Installation
 
-Provide instructions on how to install your project. For example:
+Voici les instructions pour installer votre projet :
 
-1. Clone the repository: `git clone https://github.com/HassLaf/Portfolio_Frontend.git`
-2. Navigate to the project directory: `cd Portfolio_Frontend`
-3. Install dependencies: `pnpm install`
-4. Run pnpm run dev
+Cloner le dépôt : git clone https://github.com/HassLaf/Portfolio_Frontend.git
+Naviguer jusqu'au répertoire du projet : cd Portfolio_Frontend
+Installer les dépendances : pnpm install
+Exécuter pnpm run dev
 
 ## Usage
 
-il contient une about page qui nous permet un email et une page des projets qui nécessite une autentification pour pouvoir modifier supprimer et ajouter des projets
+Ce projet comprend une page "À propos" qui nous permet d'envoyer un email, et une page de "Projets" qui nécessite une authentification pour pouvoir modifier, supprimer et ajouter des projets. J'ai utilisé MERN Pour le développement de ce projet, Plus de détail seront présent dans le rapport.
 
