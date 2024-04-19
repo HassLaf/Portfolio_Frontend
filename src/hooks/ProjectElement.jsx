@@ -1,4 +1,5 @@
 import Project from "./Project";
+import { useEffect } from "react";
 
 const ProjectList = ({projects}) => {
     return (
