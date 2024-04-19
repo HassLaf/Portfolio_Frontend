@@ -18,11 +18,13 @@ import { ProjectDialog } from "./modifyProject";
 
 
 const Project = ({projectID,title,shortDescription,description,period,thumbnail,ImagesList,Tags,createdAt}) => {
+  
   const { deleteProject, isLoading, error } = useDelete(); // Renommer useDelete en deleteProject
   
   const { user } = useAuthContext();
 
   const handleDelete = async () => {
+    
     try {
       await deleteProject(projectID);
     } catch (error) {
@@ -37,7 +39,7 @@ const Project = ({projectID,title,shortDescription,description,period,thumbnail,
   return (
 
   <ResizablePanelGroup direction="horizontal">
-      <ResizablePanel  className="max-w-md rounded-lg border "> <img src="https://png.pngtree.com/png-vector/20191121/ourmid/pngtree-blue-bird-vector-or-color-illustration-png-image_2013004.jpg" alt="Project Hero" className="h-auto max-w-full" /> {/* Adjust width and height as needed */}</ResizablePanel>
+      <ResizablePanel  className="max-w-md rounded-lg border "> <img src={thumbnail} alt="Project Hero" className="h-auto max-w-full" /> {/* Adjust width and height as needed */}</ResizablePanel>
       <ResizableHandle />
       <ResizablePanel className="flex h-full items-center justify-center p-6">
       <Card className="flex-1 bg-lightblue-400 text-center text-xl"> {/* Add 'flex' class, and 'flex-col justify-between' classes */}

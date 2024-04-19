@@ -7,7 +7,7 @@ import Home from "./hooks/DetailProjet";
 import Navbar from "./Navbar";
 import Login from "./Login";
 import { AuthContextProvider } from "./context/AuthContext";
-
+import About from "./AboutMe";
 
 
 
@@ -36,6 +36,7 @@ const App = () => {
                     <Route path="/" element={<SearchParams />} />
                     <Route path="/Project/:projectID" element={<Home />} />
                     <Route path="/Login" element={<Login />} />
+                    <Route path="/About" element={<About/>} />
                 </Routes>
             </QueryClientProvider>   
         </BrowserRouter>

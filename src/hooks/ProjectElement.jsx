@@ -13,7 +13,10 @@ const ProjectList = ({projects}) => {
                         projectID={project.projectID}
                         title={project.title} 
                         shortDescription={project.shortDescription} 
-                        description={project.description} />
+                        description={project.description}
+                        thumbnail={project.thumbnail}
+                        ImagesList={project.ImagesList}
+                        Tags={project.Tags} />
 
                 ))
             )}

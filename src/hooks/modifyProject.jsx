@@ -12,13 +12,33 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import {useUpdate} from './useUpdate';
+import { useAuthContext } from "./useAuthContext";
+import React, { useState } from 'react';
 
 export function ProjectDialog({ projectID,title, shortDescription, description, period, thumbnail, ImagesList, Tags }) {
-    const { updateProject,isLoading, error} = useUpdate(); 
-    const handleManage = async () => {
+    const { updateProject,isLoading, error} = useUpdate();
+    
+
+    const [ titleD, setTitle ] = useState(title);
+    const [ shortDescriptionD, setShortDescription ] = useState(shortDescription);
+    const [ descriptionD, setDescription ] = useState(description);
+    const [ periodD, setPeriod ] = useState(period);
+    const [ thumbnailD, setThumbnail ] = useState(thumbnail);
+    const [ ImagesListD, setImagesList ] = useState(ImagesList);
+    const [ TagsD, setTags ] = useState(Tags);
+    const [isOpen, setIsOpen] = useState(false); 
+    const { user } = useAuthContext();
+    const handleManage = async (e) => {
+        e.preventDefault();
+        
+        if(!user){
+            console.error('Vous devez être connecté pour modifier un projet.');
+            return;
+        }
         try {
           console.log('projectID HandleManage', projectID);
-          await updateProject({projectID, title, shortDescription, description, period, thumbnail, ImagesList, Tags});
+          await updateProject({projectID, titleD, shortDescriptionD, descriptionD, periodD, thumbnailD, ImagesListD, TagsD});
+          setIsOpen(false);
         } catch (error) {
           console.error('Erreur lors de la mise à jour du projet :', error);
         }
@@ -26,7 +46,7 @@ export function ProjectDialog({ projectID,title, shortDescription, description, 
       
     
   return (
-    <Dialog>
+    <Dialog isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <DialogTrigger asChild>
         <Button>Modifier</Button>
       </DialogTrigger>
@@ -47,6 +67,7 @@ export function ProjectDialog({ projectID,title, shortDescription, description, 
               defaultValue = {title}
               className="col-span-3"
               placeholder="Titre du projet"
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -58,6 +79,7 @@ export function ProjectDialog({ projectID,title, shortDescription, description, 
               defaultValue={shortDescription}
               className="col-span-3"
               placeholder="Short description of the project"
+                onChange={(e) => setShortDescription(e.target.value)}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -69,6 +91,7 @@ export function ProjectDialog({ projectID,title, shortDescription, description, 
               defaultValue={description}
               className="col-span-3"
               placeholder="Description of the project"
+                onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -80,6 +103,7 @@ export function ProjectDialog({ projectID,title, shortDescription, description, 
               defaultValue = {period}
               className="col-span-3"
               placeholder="Hours Number"
+                onChange={(e) => setPeriod(e.target.value)}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -91,17 +115,19 @@ export function ProjectDialog({ projectID,title, shortDescription, description, 
               defaultValue = {thumbnail}
               className="col-span-3"
               placeholder="Thumbnail URL"
+                onChange={(e) => setThumbnail(e.target.value)}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="ImagesList" className="text-right">
-            thumbnail URL
+            your Images URL
             </Label>
             <Input
               id="ImagesList"
               defaultValue = {thumbnail}
               className="col-span-3"
-              placeholder="Thumbnail URL"
+              placeholder="ImagesList URL"
+                onChange={(e) => setImagesList(e.target.value)}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -113,6 +139,7 @@ export function ProjectDialog({ projectID,title, shortDescription, description, 
               defaultValue = {Tags}
               className="col-span-3"
               placeholder="Tags"
+                onChange={(e) => setTags(e.target.value)}
             />
           </div>
         </div>
